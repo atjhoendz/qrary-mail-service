@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const sendResponse = require('./formatResponse')
-const { sendOTP } = require('./sendotp.service')
+const sendMail = require('./sendmail.service')
 require('dotenv').config()
 
 const app = express()
@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 router.get('/', (req, res) => {
   sendResponse(res, true, 200, {}, 'Qrary mail service is running', true)
 })
-router.post('/auth/send/OTP', sendOTP)
+router.post('/email', sendMail)
 
 app.use('/api/v1/', router)
 
